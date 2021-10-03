@@ -24,6 +24,10 @@ const routes: Routes = [
     component: CreateEmployeeComponent
   },
   {
+    path: 'edit-employee/:id',
+    component: CreateEmployeeComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }

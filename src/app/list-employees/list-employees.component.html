@@ -5,8 +5,8 @@
       Ingresar empleado
     </button>
   </div>
-
-<mat-table [dataSource]="employeesArray" class="mat-elevation-z8">
+<h3 *ngIf="employeesArray.length==0" class="align">No existen empleados registados</h3>
+<mat-table *ngIf="employeesArray.length>0" [dataSource]="employeesArray" class="mat-elevation-z8">
     <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
@@ -34,7 +34,7 @@
     <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
         <mat-cell *matCellDef="let employe"> 
-            <button mat-raised-button color="primary">
+            <button mat-raised-button color="primary" [routerLink] = "['/edit-employee/',employe.id]">
                 <mat-icon>edit</mat-icon>
                 Editar</button>
             <button (click)="deleteEmployee(employe.id)" mat-raised-button color="warn">

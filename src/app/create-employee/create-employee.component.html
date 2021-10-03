@@ -2,12 +2,12 @@
 <div class="container">
     <mat-card>
         <div class="align">
-            <mat-card-title>Nuevo Empleado</mat-card-title>
+            <mat-card-title>{{title}}</mat-card-title>
         </div>
-        <mat-card-subtitle>Ingrese un nuevo empleado</mat-card-subtitle>
+        <mat-card-subtitle>{{description}}</mat-card-subtitle>
         <mat-card-content>
           <span class="align" color="warn" *ngIf="submitted && createEmployee.invalid"> TODOS LOS CAMPOS SON REQUERIDOS</span>
-            <form [formGroup] = "createEmployee" (ngSubmit) = "addEmployee()">
+            <form [formGroup] = "createEmployee" (ngSubmit) = "addUpdateEmployee()">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Nombre</mat-label>
                     <textarea matInput formControlName="firstName" placeholder="Ej. Juan"></textarea>
@@ -27,7 +27,7 @@
                   <div class="align">
                     <mat-card-actions>
                         <button mat-raised-button color="primary" routerLink="/employees">Volver</button>
-                        <button type="submit" mat-raised-button color="accent">Agregar</button>
+                        <button type="submit" mat-raised-button color="accent">{{button}}</button>
                     </mat-card-actions>
                     <mat-spinner *ngIf="loading"></mat-spinner>
                 </div>
