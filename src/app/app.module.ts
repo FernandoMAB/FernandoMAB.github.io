@@ -25,6 +25,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ListEmployeesComponent,
     CreateEmployeeComponent,
     HeaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     BrowserModule,

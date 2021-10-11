@@ -1,6 +1,9 @@
 <app-header></app-header>
-
+<div *ngIf = "user$ |async as user; else login">
 <div class="demo-button-container">
+  <div>
+    <h3 class="text-center">Lista de Empleados</h3>
+  </div>
     <button mat-stroked-button color="primary" class="demo-button" routerLink="/create-employee">
       Ingresar empleado
     </button>
@@ -33,16 +36,20 @@
     <!-- Action Column -->
     <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
-        <mat-cell *matCellDef="let employe"> 
-            <button mat-raised-button color="primary" [routerLink] = "['/edit-employee/',employe.id]">
-                <mat-icon>edit</mat-icon>
-                Editar</button>
-            <button (click)="deleteEmployee(employe.id)" mat-raised-button color="warn">
+        <mat-cell class="example-button-row" *matCellDef="let employe"> 
+            <button mat-raised-button color="primary"  [routerLink] = "['/edit-employee/',employe.id]" title="Editar">
+                <mat-icon >edit</mat-icon>
+                </button>
+            <button (click)="deleteEmployee(employe.id)" mat-raised-button color="warn" title="Eliminar">
                 <mat-icon>delete</mat-icon>
-                Eliminar</button>  
+                </button>  
         </mat-cell>
       </ng-container>
   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+</div>
+<ng-template #login>
+  <app-not-authorized></app-not-authorized>
+</ng-template>

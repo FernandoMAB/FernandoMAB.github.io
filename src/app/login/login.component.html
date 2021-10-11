@@ -1,0 +1,27 @@
+<app-header></app-header>
+<mat-card>
+    <mat-card-content>
+      <form [formGroup] = "loginForm" (ngSubmit)="onLogin()">
+        <h2>Inicio de sesión</h2>
+        <mat-error>
+          The username and password were not recognised
+        </mat-error>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Correo electrónico" formControlName="email" required email>
+          <mat-error>
+            Ingresar un correo electrónico válido
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Contraseña" formControlName = "password" required>
+          <mat-error>
+            Ingresar una contraseña
+          </mat-error>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Iniciar sesión</button>
+      </form>
+      <div class = "divlog">
+        <p> ¿No tienes una cuenta? <a [routerLink] = "['/register']">Registrate</a></p>
+      </div>
+    </mat-card-content>
+  </mat-card>

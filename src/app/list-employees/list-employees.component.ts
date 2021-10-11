@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { EmployeeService } from '../services/employee.service';
+import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-employees',
@@ -11,8 +13,8 @@ import { EmployeeService } from '../services/employee.service';
 export class ListEmployeesComponent implements OnInit {
   employees : any[] =[];
   employeesArray :Employee[] =[];
-
-  constructor(private _employeeService: EmployeeService) { }
+  public user$: Observable <any>= this.authSvc.af.user;
+  constructor(private _employeeService: EmployeeService, private authSvc: AuthService) { }
 
   ngOnInit(): void {
     this.getEmployees();

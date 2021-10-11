@@ -1,18 +1,31 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <div class="row between-xs middle-xs header-row">
-            <nav>
+            <nav class="example-button-row">
                 <span><mat-icon>public</mat-icon> Ingenieria WEB </span>
                 <a mat-raised-button color="primary" routerLink="/home">
                     <mat-icon>home</mat-icon>
                     Home</a>
-                <a mat-raised-button color="primary" routerLink="/employees">
-                    <mat-icon>view_list</mat-icon>
-                    Lista de Empleados</a>
+                    <a mat-raised-button color="primary" routerLink="/employees" *ngIf = "user$ |async as user">
+                        <mat-icon>view_list</mat-icon>
+                        Empleados</a>
             </nav>
-            <a mat-raised-button color="primary" routerLink="/home">
-                <mat-icon>login</mat-icon>
-                Iniciar sesión</a>
+            <div>
+                <div *ngIf = "user$ |async as user; else login"> 
+                    <a mat-flat-button color="primary">Bienvendio: {{user?.email}}</a>
+                    <a mat-flat-button color="primary" (click) = "onLogout()">
+                        Salir</a>
+                </div>
+                <ng-template #login>
+                    <div>
+                        <a mat-flat-button color="primary" routerLink="/register">
+                            Registrate</a>
+                        <a mat-flat-button color="primary" routerLink="/login">
+                            <mat-icon>login</mat-icon>
+                            Iniciar sesión</a>
+                    </div>
+                </ng-template>
+            </div>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
