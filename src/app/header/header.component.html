@@ -3,10 +3,10 @@
         <div class="row between-xs middle-xs header-row">
             <nav class="example-button-row">
                 <span><mat-icon>public</mat-icon> Ingenieria WEB </span>
-                <a mat-raised-button color="primary" routerLink="/home">
+                <a mat-raised-button color="primary" routerLink="/home" title="Inicio">
                     <mat-icon>home</mat-icon>
                     Home</a>
-                    <a mat-raised-button color="primary" routerLink="/employees" *ngIf = "user$ |async as user">
+                    <a mat-raised-button color="primary" routerLink="/employees" *ngIf = "user$ |async as user" title="Lista de Empleados">
                         <mat-icon>view_list</mat-icon>
                         Empleados</a>
             </nav>
@@ -14,7 +14,8 @@
                 <div *ngIf = "user$ |async as user; else login"> 
                     <a mat-flat-button color="primary">Bienvendio: {{user?.email}}</a>
                     <a mat-flat-button color="primary" (click) = "onLogout()">
-                        Salir</a>
+                        <mat-icon title="Cerrar sesión">logout</mat-icon>
+                    </a>
                 </div>
                 <ng-template #login>
                     <div>
