@@ -6,6 +6,9 @@ import { ListEmployeesComponent } from './list-employees/list-employees.componen
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './register/register.component';
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {
@@ -19,19 +22,26 @@ const routes: Routes = [
   },
   {
     path: 'employees',
-    component: ListEmployeesComponent
+    canActivate: [AngularFireAuthGuard],
+    component: ListEmployeesComponent,
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'create-employee',
-    component: CreateEmployeeComponent
+    canActivate: [AngularFireAuthGuard],
+    component: CreateEmployeeComponent,
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'edit-employee/:id',
-    component: CreateEmployeeComponent
+    canActivate: [AngularFireAuthGuard],
+    component: CreateEmployeeComponent,
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInTo }
   },
   {
     path: 'register',

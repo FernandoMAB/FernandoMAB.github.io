@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
   providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
+  errorLogged = false;
   loginForm = new FormGroup({
     email : new FormControl(''),
     password: new FormControl(''),
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
       const user = await this.authSvc.logInUser(email,password);
       if(user){
         this.router.navigate(['/home']);
+      }else{
+        this.errorLogged = true;
       }
     } catch (error) {
       console.log(error);

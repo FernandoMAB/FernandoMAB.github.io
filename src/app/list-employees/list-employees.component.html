@@ -1,8 +1,11 @@
 <app-header></app-header>
-<div *ngIf = "user$ |async as user; else login">
 <div class="demo-button-container">
   <div>
-    <h3 class="text-center">Lista de Empleados</h3>
+    <h2 class="text-center">
+      <strong>
+        Lista de Empleados
+      </strong>
+      </h2>
   </div>
     <button mat-stroked-button color="primary" class="demo-button" routerLink="/create-employee">
       Ingresar empleado
@@ -49,7 +52,4 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-</div>
-<ng-template #login>
-  <app-not-authorized></app-not-authorized>
-</ng-template>
+
