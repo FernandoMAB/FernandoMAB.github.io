@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="card" *ngIf="user$ |async as user">
+    <div class="card-body">
+        <h3 class="card-title"> Gracias por registrarte!</h3>
+        <div class="form-group">
+            <p class="text-center">
+                Te enviamos un correo de confirmación a tu email: <strong>{{user?.email}}</strong>
+            </p>
+            <p class="text-center">
+                Por favor ingresa a tu email y da clic en el link para verificarlo
+            </p>
+        </div>
+        <div class="form-group">
+            <button mat-raised-button color="warn" (click)="onSendEmail()">Reenviar correo de verificación
+                <mat-icon>add</mat-icon>
+              </button>
+        </div>
+    </div>
+</div>

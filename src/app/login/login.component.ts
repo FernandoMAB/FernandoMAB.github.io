@@ -26,14 +26,28 @@ export class LoginComponent implements OnInit {
     const {email,password} = this.loginForm.value;
     try {
       const user = await this.authSvc.logInUser(email,password);
-      if(user){
+      if(user && user.user?.emailVerified){
+        console.log('USER->',user);
         this.router.navigate(['/home']);
-      }else{
+      }else if (user && user.user?.emailVerified == false){
+        this.router.navigate(['/verificationEmail']);
+      }
+      else{
         this.errorLogged = true;
       }
     } catch (error) {
       console.log(error);
+    } 
+  }
+
+  async onGoogleLogin(){
+    try {
+      this.authSvc.loginGoogle();
+      if(this.authSvc.getCurrentUser != null){
+        this.router.navigate(['/home']);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    
   }
 }

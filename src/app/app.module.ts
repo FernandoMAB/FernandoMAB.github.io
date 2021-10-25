@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { environment } from '../environments/environment';
@@ -28,6 +28,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     PageNotFoundComponent,
     LoginComponent,
     RegisterComponent,
-    NotAuthorizedComponent
+    NotAuthorizedComponent,
+    SendEmailComponent,
+    ForgotPasswordComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,9 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     ReactiveFormsModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide: BUCKET, useValue:'gs://ingwebfm.appspot.com/'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
