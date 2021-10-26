@@ -10,6 +10,8 @@ import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectL
 import { SendEmailComponent } from './send-email/send-email.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { CreateActorComponent } from './create-actor/create-actor.component';
+import { ListActorsComponent } from './list-actors/list-actors.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -61,6 +63,20 @@ const routes: Routes = [
   {
     path: 'upload',
     component: UploadImageComponent
+  },
+  {
+    path: 'create-actor',
+    component: CreateActorComponent
+  },
+  {
+    path: 'actors',
+    component: ListActorsComponent
+  },
+  {
+    path: 'edit-actor/:id',
+    canActivate: [AngularFireAuthGuard],
+    component: CreateActorComponent,
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: '**',

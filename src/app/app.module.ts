@@ -32,6 +32,15 @@ import { SendEmailComponent } from './send-email/send-email.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { NgFilesDirective } from './upload-image/directives/ng-files.directive';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { CreateActorComponent } from './create-actor/create-actor.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { ListActorsComponent } from './list-actors/list-actors.component';
+
+
 
 
 @NgModule({
@@ -49,7 +58,9 @@ import { NgFilesDirective } from './upload-image/directives/ng-files.directive';
     SendEmailComponent,
     ForgotPasswordComponent,
     UploadImageComponent,
-    NgFilesDirective
+    NgFilesDirective,
+    CreateActorComponent,
+    ListActorsComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +77,12 @@ import { NgFilesDirective } from './upload-image/directives/ng-files.directive';
     MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     {provide: BUCKET, useValue:'gs://ingwebfm.appspot.com/'}

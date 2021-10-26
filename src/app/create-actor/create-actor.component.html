@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container">
+    <mat-card>
+        <div class="align">
+            <mat-card-title>{{title}}</mat-card-title>
+        </div>
+        <mat-card-subtitle>{{description}}</mat-card-subtitle>
+        <mat-card-content>
+          <span class="align" color="warn" *ngIf="submitted && createActor.invalid"> TODOS LOS CAMPOS SON REQUERIDOS</span>
+            <form [formGroup] = "createActor" (ngSubmit) = "addUpdateActor()">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <textarea matInput formControlName="firstName" placeholder="Ej. Juan"></textarea>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <textarea matInput formControlName="lastName" placeholder="Ej. Perez"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Sexo</mat-label>
+                    <mat-select formControlName="gender">
+                      <mat-option value="Masculino">Masculino</mat-option>
+                      <mat-option value="Femenino">Femenino</mat-option>
+                      <mat-option value="Otro">Otro</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="MM/dd/yyyy">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <div class="align">
+                    <mat-card-actions>
+                        <button type= "button" mat-raised-button color="primary" routerLink="/actors">Volver</button>
+                        <button type="submit" mat-raised-button color="accent">{{button}}</button>
+                    </mat-card-actions>
+                    <mat-spinner *ngIf="loading"></mat-spinner>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

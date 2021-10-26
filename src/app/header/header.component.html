@@ -9,6 +9,9 @@
                     <a mat-raised-button color="primary" routerLink="/employees" *ngIf = "user$ |async as user" title="Lista de Empleados">
                         <mat-icon>view_list</mat-icon>
                         Empleados</a>
+                    <a mat-raised-button color="primary" routerLink="/actors" *ngIf = "user$ |async as user" title="Lista de Empleados">
+                        <mat-icon>view_list</mat-icon>
+                        Actores</a>
             </nav>
             <div>
                 <div *ngIf = "user$ |async as user; else login"> 

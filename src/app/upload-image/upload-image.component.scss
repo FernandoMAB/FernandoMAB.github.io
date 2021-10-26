@@ -1,0 +1,15 @@
+.drop-zone{
+    border: dotted 3px lightgray;
+    color: #666;
+    height: 253px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.row{
+    margin-left: 10px;
+}
+.file-over{
+    border: dotted 3px #2196f3;
+}
