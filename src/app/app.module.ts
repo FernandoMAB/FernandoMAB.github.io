@@ -31,6 +31,7 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
 import { SendEmailComponent } from './send-email/send-email.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { NgFilesDirective } from './upload-image/directives/ng-files.directive';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     NotAuthorizedComponent,
     SendEmailComponent,
     ForgotPasswordComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    NgFilesDirective
   ],
   imports: [
     BrowserModule,
