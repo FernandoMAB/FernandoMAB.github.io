@@ -1,2 +1,10 @@
 <app-header></app-header>
 <app-banner></app-banner>
+<div class="product-grid">
+
+
+<app-film *ngFor="let movie of filmArray" 
+    (movieClicked) = "clickMovie($event)" 
+    [movie] = "movie">
+    </app-film>
+</div>

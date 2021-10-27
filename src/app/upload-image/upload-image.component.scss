@@ -1,11 +1,12 @@
 .drop-zone{
     border: dotted 3px lightgray;
     color: #666;
-    height: 253px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 700px;
 }
 .row{
     margin-left: 10px;
@@ -13,3 +14,20 @@
 .file-over{
     border: dotted 3px #2196f3;
 }
+
+.align {
+    padding: 3.8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }

@@ -28,7 +28,7 @@ export class ListActorsComponent implements OnInit {
           modificationDate: element.payload.doc.data().modificationDate
         })
       });
-      console.log(this.ActorsArray);
+      //console.log(this.ActorsArray);
     })
   }
   deleteActor(id: string){

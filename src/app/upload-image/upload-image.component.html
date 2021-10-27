@@ -1,73 +1,122 @@
 <app-header></app-header>
-<mat-card>
-    <mat-card-content>
-        <form [formGroup] = "createFilm" (ngSubmit) = "addFilm()">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Titulo</mat-label>
-                <textarea matInput formControlName="title" placeholder="Ej. Juan"></textarea>
-              </mat-form-field>
-              <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Imagen</mat-label>
-                <textarea matInput formControlName="image" placeholder="Ej. Juan"></textarea>
-              </mat-form-field>
-        
-<div class="row">
-    <div>
-        <div class="card">
-            <div class="header">
-                <span>Fotoos</span>
-            </div>
-            <div>
-                <div 
-                appNgFiles
-                [files]="files"
-                (mouseOver)= "isOverDrop = $event"
-                [ngClass]="{'file-over': isOverDrop}"
-                class="drop-zone">
-                    Drop-Zone
-                
-                <h4>Arrasta tu imagen AKI</h4>
-                <mat-icon title="Arrasta la imagen aqui">file_upload</mat-icon>
-            </div>
-            </div>
+<div class="container">
+    <mat-card>
+        <div class="align">
+            <mat-card-title>{{title}}</mat-card-title>
         </div>
-    </div>
-    <div>
-        <div class="card">
-            <div class="header">
-                <h4>Fotos por subir</h4>
-            </div>
-            <div class="body">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre de la foto</th>
-                            <th>Tamaño</th>
-                            <th>URL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor = "let file of files">
-                            <td>{{file.name}}</td>
-                            <td >{{file.file.size /1024 /1024 | number:".2.2"}}MB</td>
-                            <td *ngIf="file.downloadURL |async as downloadURL">{{downloadURL}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="container">
-                    <button type= "button" (click)="files = []">
-                        Borrar
-                    </button>
-                    <button type= "button" (click)="onUpload()"
-                    [disabled] = "files.length === 0">
-                        Subir 
-                    </button>
+        <mat-card-subtitle>{{description}}</mat-card-subtitle>
+        <mat-card-content>
+          <span class="align" color="warn" *ngIf="submitted && createFilm.invalid"> TODOS LOS CAMPOS SON REQUERIDOS</span>
+            <form [formGroup] = "createFilm" (ngSubmit) = "addUpdateMovie()">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Titulo</mat-label>
+                    <textarea matInput formControlName="title" placeholder="Ej. Titanic"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Fecha de Lanzamiento</mat-label>
+                    <input matInput formControlName="releaseDate" [matDatepicker]="picker" placeholder="MM/dd/yyyy">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Trama</mat-label>
+                    <textarea matInput formControlName="overView" placeholder="Ej. An American epic romance and disaster film based on accounts of the sinking of the RMS Titanic."></textarea>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Duración</mat-label>
+                    <textarea matInput formControlName="duration" placeholder="Ej. Titanic"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-widt" appearance="fill">
+                    <mat-label>Géneros</mat-label>
+                    <mat-select formControlName="genre">
+                        <td *ngFor="let genre of genreArray">
+                            <mat-option value="genreId">{{genre.name}}</mat-option>
+                        </td>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-widt" appearance="fill">
+                    <mat-label>Actores</mat-label>
+                    <mat-select formControlName="actor">
+                        <td *ngFor="let actor of actorArray">
+                            <mat-option value="actorId">{{actor.firstName}} {{actor.lastName}}</mat-option>
+                        </td>
+                    </mat-select>
+                  </mat-form-field>
+                  
+                  <div class="row">
+                    <div>
+                        <div class="card">
+                            <div class="header">
+                                <span>Fotoos</span>
+                            </div>
+                            <div>
+                                <div 
+                                appNgFiles
+                                [files]="files"
+                                (mouseOver)= "isOverDrop = $event"
+                                [ngClass]="{'file-over': isOverDrop}"
+                                class="drop-zone">
+                                    Drop-Zone
+                                
+                                <h4>Arrasta tu imagen AKI</h4>
+                                <mat-icon title="Arrasta la imagen aqui">file_upload</mat-icon>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card">
+                            <div class="header">
+                                <h4>Fotos por subir</h4>
+                            </div>
+                            <div class="body">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre de la foto</th>
+                                            <th>Tamaño</th>
+                                            <th>URL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor = "let file of files">
+                                            <td>{{file.name}}</td>
+                                            <td >{{file.file.size /1024 /1024 | number:".2.2"}}MB</td>
+                                            <td *ngIf="file.downloadURL |async as downloadURL">{{downloadURL}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="container">
+                                    <button type= "button" (click)="files = []">
+                                        Borrar
+                                    </button>
+                                    <button type= "button" (click)="onUpload()"
+                                    [disabled] = "files.length === 0">
+                                        Subir 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Dirección Imagen</mat-label>
+                    <textarea matInput formControlName="image" placeholder="Ej. https://firebasestorage.googleapis.com/v0/b/ingwebfm.appspot.com...."></textarea>
+                  </mat-form-field>
+                  <div class="align">
+                    <mat-card-actions>
+                        <button type= "button" mat-raised-button color="primary" routerLink="/employees">Volver</button>
+                        <button type="submit" mat-raised-button color="accent">{{button}}</button>
+                    </mat-card-actions>
+                    <mat-spinner *ngIf="loading"></mat-spinner>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
 </div>
-<button type="submit" mat-raised-button color="accent">Guardar</button>
-</form>
-</mat-card-content>
-</mat-card>
+        
+

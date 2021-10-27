@@ -63,7 +63,7 @@ const routes: Routes = [
     component: ForgotPasswordComponent
   },
   {
-    path: 'upload',
+    path: 'create',
     component: UploadImageComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
