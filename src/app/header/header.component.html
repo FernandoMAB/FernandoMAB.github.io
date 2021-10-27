@@ -9,9 +9,12 @@
                     <a mat-raised-button color="primary" routerLink="/employees" *ngIf = "user$ |async as user" title="Lista de Empleados">
                         <mat-icon>view_list</mat-icon>
                         Empleados</a>
-                    <a mat-raised-button color="primary" routerLink="/actors" *ngIf = "user$ |async as user" title="Lista de Empleados">
+                    <a mat-raised-button color="primary" routerLink="/actors" *ngIf = "user$ |async as user" title="Lista de Actores">
                         <mat-icon>view_list</mat-icon>
                         Actores</a>
+                    <a mat-raised-button color="primary" routerLink="/genres" *ngIf = "user$ |async as user" title="Lista de Géneros">
+                        <mat-icon>view_list</mat-icon>
+                        Generos</a>
             </nav>
             <div>
                 <div *ngIf = "user$ |async as user; else login"> 

@@ -27,7 +27,7 @@ export class CreateEmployeeComponent implements OnInit {
       email: ['',[Validators.required,Validators.email]]
     })
     this.id = this.aRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
+    //console.log(this.id);
   }
 
 
@@ -57,9 +57,9 @@ export class CreateEmployeeComponent implements OnInit {
       modificationDate: new Date()
     }
     this.loading = true;
-    console.log(employee)
+    //console.log(employee)
     this._employeeService.addEmployee(employee).then(()=>{
-      console.log('Empleado registrado!');
+      //console.log('Empleado registrado!');
       this.loading = false;
       this.router.navigate(['/employees']);
     }).catch(error =>{

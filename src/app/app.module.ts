@@ -39,6 +39,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ListActorsComponent } from './list-actors/list-actors.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ListGenreComponent } from './list-genre/list-genre.component';
+import { CreateGenreComponent } from './create-genre/create-genre.component';
+
 
 
 
@@ -60,7 +64,9 @@ import { ListActorsComponent } from './list-actors/list-actors.component';
     UploadImageComponent,
     NgFilesDirective,
     CreateActorComponent,
-    ListActorsComponent
+    ListActorsComponent,
+    ListGenreComponent,
+    CreateGenreComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +88,8 @@ import { ListActorsComponent } from './list-actors/list-actors.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: BUCKET, useValue:'gs://ingwebfm.appspot.com/'}

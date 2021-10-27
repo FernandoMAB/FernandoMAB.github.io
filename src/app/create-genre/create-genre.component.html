@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class="container">
+    <mat-card>
+        <div class="align">
+            <mat-card-title>{{title}}</mat-card-title>
+        </div>
+        <mat-card-subtitle>{{des}}</mat-card-subtitle>
+        <mat-card-content>
+          <span class="align" color="warn" *ngIf="submitted && createGenre.invalid"> TODOS LOS CAMPOS SON REQUERIDOS</span>
+            <form [formGroup] = "createGenre" (ngSubmit) = "addUpdateEmployee()">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <textarea matInput formControlName="name" placeholder="Ej. Horror"></textarea>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Ej. Trata sobre la obtención de las emociones de la audiencia como miedo, terror o repugnancia"></textarea>
+                  </mat-form-field>
+                  <div class="align">
+                    <mat-card-actions>
+                        <button type= "button" mat-raised-button color="primary" routerLink="/genres">Volver</button>
+                        <button type="submit" mat-raised-button color="accent">{{button}}</button>
+                    </mat-card-actions>
+                    <mat-spinner *ngIf="loading"></mat-spinner>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

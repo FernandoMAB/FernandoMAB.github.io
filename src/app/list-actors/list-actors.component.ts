@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActorService } from '../services/actor.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ActorService } from '../services/actor.service';
 })
 export class ListActorsComponent implements OnInit {
   ActorsArray :Actor[] =[];
-  constructor(private _actorService: ActorService) { }
+  constructor(private _actorService: ActorService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getActors();
@@ -32,7 +33,12 @@ export class ListActorsComponent implements OnInit {
   }
   deleteActor(id: string){
     this._actorService.deleteActor(id).then(()=>{
-      console.log('Actor eliminado!')
+      this._snackBar.open('Actor Eliminado!', 'Exitosamente :D', {
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        duration: 8*100
+      });
+      
     }).catch(error =>{
       console.log(error);
     })

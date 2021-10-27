@@ -4,6 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import { EmployeeService } from '../services/employee.service';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list-employees',
@@ -14,7 +15,7 @@ export class ListEmployeesComponent implements OnInit {
   employees : any[] =[];
   employeesArray :Employee[] =[];
   public user$: Observable <any>= this.authSvc.af.user;
-  constructor(private _employeeService: EmployeeService, private authSvc: AuthService) { }
+  constructor(private _employeeService: EmployeeService, private authSvc: AuthService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -41,12 +42,17 @@ export class ListEmployeesComponent implements OnInit {
           modificationDate: element.payload.doc.data().modificationDate
         })
       });
-      console.log(this.employeesArray);
+      //console.log(this.employeesArray);
     })
   }
   deleteEmployee(id: string){
     this._employeeService.deleteEmployees(id).then(()=>{
-      console.log('Empleado eliminado!')
+      console.log('Empleado eliminado!');
+      this._snackBar.open('Actor Eliminado!', 'Exitosamente :D', {
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        duration: 8*100
+      });
     }).catch(error =>{
       console.log(error);
     })

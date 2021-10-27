@@ -12,6 +12,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { CreateActorComponent } from './create-actor/create-actor.component';
 import { ListActorsComponent } from './list-actors/list-actors.component';
+import { CreateGenreComponent } from './create-genre/create-genre.component';
+import { ListGenreComponent } from './list-genre/list-genre.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -62,20 +64,44 @@ const routes: Routes = [
   },
   {
     path: 'upload',
-    component: UploadImageComponent
+    component: UploadImageComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'create-actor',
-    component: CreateActorComponent
+    component: CreateActorComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'actors',
-    component: ListActorsComponent
+    component: ListActorsComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'edit-actor/:id',
     canActivate: [AngularFireAuthGuard],
     component: CreateActorComponent,
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'create-genre',
+    component: CreateGenreComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'genres',
+    component: ListGenreComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'edit-genre/:id',
+    canActivate: [AngularFireAuthGuard],
+    component: CreateGenreComponent,
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
