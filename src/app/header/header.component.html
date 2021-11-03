@@ -19,7 +19,7 @@
             <div>
                 <div *ngIf = "user$ |async as user; else login"> 
                     <a mat-flat-button color="primary"><mat-icon>person</mat-icon>
-                        Bienvendio: {{user?.email}}</a>
+                        Bienvenido: {{user?.email}}</a>
                     <a mat-flat-button color="primary" (click) = "onLogout()">
                         <mat-icon title="Cerrar sesión">logout</mat-icon>
                     </a>

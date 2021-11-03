@@ -94,16 +94,14 @@ export class UploadImageComponent implements OnInit {
       modificationDate: new Date()
     }
     this.loading = true;
-    
     this._movieService.addMovie(film).then(()=>{
       //console.log('Empleado registrado!');
-
       this.loading = false;
-      
     }).catch(error =>{
       console.error();
       this.loading = false;
     })
+    this.id = this.aRoute.snapshot.paramMap.get('id');
     const actor: any = {
       id_actor: this.createFilm.value.actorId,
       id_movie: this.id,
@@ -113,6 +111,7 @@ export class UploadImageComponent implements OnInit {
       id_movie: this.id,
     }
     console.log(actor)
+    
     this._movieService.addMovActor(actor);
     this._movieService.addMovGenre(genre);
   }

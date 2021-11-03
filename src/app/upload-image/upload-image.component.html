@@ -32,18 +32,18 @@
                   <mat-form-field class="example-full-widt" appearance="fill">
                     <mat-label>Géneros</mat-label>
                     <mat-select formControlName="genre">
-                        <td *ngFor="let genre of genreArray">
+                        <div *ngFor="let genre of genreArray">
                             <mat-option value="genreId">{{genre.name}}</mat-option>
-                        </td>
+                        </div>
                     </mat-select>
                   </mat-form-field>
 
                   <mat-form-field class="example-full-widt" appearance="fill">
                     <mat-label>Actores</mat-label>
                     <mat-select formControlName="actor">
-                        <td *ngFor="let actor of actorArray">
+                        <div *ngFor="let actor of actorArray">
                             <mat-option value="actorId">{{actor.firstName}} {{actor.lastName}}</mat-option>
-                        </td>
+                        </div>
                     </mat-select>
                   </mat-form-field>
                   
