@@ -1,0 +1,55 @@
+<app-header></app-header>
+<div class="demo-button-container">
+  <div>
+    <h2 class="text-center">
+      <strong>
+        Lista de Peliculas
+      </strong>
+      </h2>
+  </div>
+    <button mat-stroked-button color="primary" class="demo-button" routerLink="/create" title="Ingresar una nueva pelicula">
+      Ingresar una pelicula
+    </button>
+  </div>
+<h3 *ngIf="moviesArray.length==0" class="align">No existen Peliculas registados</h3>
+<mat-table *ngIf="moviesArray.length>0" [dataSource]="moviesArray" class="mat-elevation-z8">
+    <!-- First Name Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </mat-header-cell>
+      <mat-cell *matCellDef="let movie"> {{movie.title}} </mat-cell>
+    </ng-container>
+  
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="releaseDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Lanzamiento </mat-header-cell>
+      <mat-cell *matCellDef="let movie"> {{movie.releaseDate}} </mat-cell>
+    </ng-container>
+  
+    <!-- User Name Column -->
+    <ng-container matColumnDef="overView">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Resumen </mat-header-cell>
+      <mat-cell *matCellDef="let movie"> {{movie.overView}} </mat-cell>
+    </ng-container>
+  
+    <!-- Email Column -->
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Duración </mat-header-cell>
+      <mat-cell *matCellDef="let movie"> {{movie.duration}} </mat-cell>
+    </ng-container>
+    <!-- Action Column -->
+    <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
+        <mat-cell class="example-button-row" *matCellDef="let movie"> 
+            <button mat-raised-button color="primary"  [routerLink] = "['/edit-employee/',movie.id]" title="Editar">
+                <mat-icon >edit</mat-icon>
+                </button>
+            <button (click)="deleteMovies(movie.id)" mat-raised-button color="warn" title="Eliminar">
+                <mat-icon>delete</mat-icon>
+                </button>  
+        </mat-cell>
+      </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+

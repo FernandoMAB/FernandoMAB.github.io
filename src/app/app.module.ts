@@ -43,6 +43,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ListGenreComponent } from './list-genre/list-genre.component';
 import { CreateGenreComponent } from './create-genre/create-genre.component';
 import { FilmComponent } from './film/film.component';
+import { ListMoviesComponent } from './list-movies/list-movies.component';
 
 
 
@@ -68,7 +69,8 @@ import { FilmComponent } from './film/film.component';
     ListActorsComponent,
     ListGenreComponent,
     CreateGenreComponent,
-    FilmComponent
+    FilmComponent,
+    ListMoviesComponent
   ],
   imports: [
     BrowserModule,

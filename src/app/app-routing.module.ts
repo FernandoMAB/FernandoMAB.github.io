@@ -14,6 +14,7 @@ import { CreateActorComponent } from './create-actor/create-actor.component';
 import { ListActorsComponent } from './list-actors/list-actors.component';
 import { CreateGenreComponent } from './create-genre/create-genre.component';
 import { ListGenreComponent } from './list-genre/list-genre.component';
+import { ListMoviesComponent } from './list-movies/list-movies.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -61,6 +62,12 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
+  },
+  {
+    path: 'movies',
+    component: ListMoviesComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'create',

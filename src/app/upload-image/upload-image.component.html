@@ -33,7 +33,7 @@
                     <mat-label>Géneros</mat-label>
                     <mat-select formControlName="genre">
                         <div *ngFor="let genre of genreArray">
-                            <mat-option value="genreId">{{genre.name}}</mat-option>
+                            <mat-option value="{{genre.id}}">{{genre.name}}</mat-option>
                         </div>
                     </mat-select>
                   </mat-form-field>
@@ -42,7 +42,7 @@
                     <mat-label>Actores</mat-label>
                     <mat-select formControlName="actor">
                         <div *ngFor="let actor of actorArray">
-                            <mat-option value="actorId">{{actor.firstName}} {{actor.lastName}}</mat-option>
+                            <mat-option value="{{actor.id}}">{{actor.firstName}} {{actor.lastName}}</mat-option>
                         </div>
                     </mat-select>
                   </mat-form-field>

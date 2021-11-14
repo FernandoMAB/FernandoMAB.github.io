@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { MovieService } from '../services/movie.service';
 import { Actor } from '../list-actors/list-actors.component';
 import { Genre } from '../list-genre/list-genre.component';
+import { Film } from '../home/home.component';
 
 @Component({
   selector: 'app-upload-image',
@@ -26,6 +27,7 @@ export class UploadImageComponent implements OnInit {
   files: FileItem[] = [];
   actorArray: Actor[] = [];
   genreArray: Genre[] = [];
+  filmArray :Film[] =[];
 
   isOverDrop = false;
 
@@ -84,6 +86,7 @@ export class UploadImageComponent implements OnInit {
   }
 
    addFilm(){
+    console.log(this.createFilm.value);
     const film: any = {
       title: this.createFilm.value.title,
       releaseDate: this.createFilm.value.releaseDate,
@@ -101,19 +104,41 @@ export class UploadImageComponent implements OnInit {
       console.error();
       this.loading = false;
     })
-    this.id = this.aRoute.snapshot.paramMap.get('id');
+
+    this.getFilmsID(this.createFilm.value.actor,this.createFilm.value.genre);
+    console.log(this.filmArray)
+  }
+
+  getFilmsID(id_act: string,id_gen:string){
+    this._movieService.getMovieLast().subscribe(data =>{
+      this.filmArray = [];
+      data.forEach((element:any) => {
+        this.filmArray.push({
+          id: element.payload.doc.id,
+          title: element.payload.doc.data().title,
+          image: element.payload.doc.data().image,
+          duration: element.payload.doc.data().duration,
+          overView: element.payload.doc.data().overView,
+          releaseDate: new Date(element.payload.doc.data().releaseDate.seconds*1000),
+          creationDate: element.payload.doc.data().creationDate,
+          modificationDate: element.payload.doc.data().modificationDate
+        })
+      });
+      console.log(this.filmArray);
+    })
     const actor: any = {
-      id_actor: this.createFilm.value.actorId,
-      id_movie: this.id,
+      id_actor: this.createFilm.value.actor,
+      id_movie: this.filmArray[0].id,
     }
     const genre: any = {
-      id_genre: this.createFilm.value.genreId,
-      id_movie: this.id,
+      id_genre: this.createFilm.value.genre,
+      id_movie: this.filmArray[0].id,
     }
     console.log(actor)
     
     this._movieService.addMovActor(actor);
     this._movieService.addMovGenre(genre);
+    console.log('idd: ',this.filmArray[0].id)
   }
 
   updateFilm(id:string){

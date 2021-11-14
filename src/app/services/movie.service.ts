@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { collection, query, where } from "firebase/firestore";
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -44,8 +45,8 @@ export class MovieService {
 
   
 
-  getEmployee(id: string): Observable <any>{
-    return this.firestore.collection('movie').doc(id).snapshotChanges();
+  getMovieLast(): Observable <any>{
+    return this.firestore.collection('movie', ref=> ref.orderBy('creationDate','desc')).snapshotChanges();
   }
 
   updateEmployee(id: string, data: any): Promise <any>{
