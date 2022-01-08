@@ -14,8 +14,6 @@
 
 
     <div class="product-grid">
-
-
       <app-film *ngFor="let movie of RecomendationM" 
           (movieClicked) = "clickMovie($event)" 
           [movie] = "movie">

@@ -45,6 +45,7 @@ import { CreateGenreComponent } from './create-genre/create-genre.component';
 import { FilmComponent } from './film/film.component';
 import { ListMoviesComponent } from './list-movies/list-movies.component';
 import { MovRecomComponent } from './mov-recom/mov-recom.component';
+import { FilterComponent } from './filter/filter.component';
 
 
 
@@ -72,7 +73,8 @@ import { MovRecomComponent } from './mov-recom/mov-recom.component';
     CreateGenreComponent,
     FilmComponent,
     ListMoviesComponent,
-    MovRecomComponent
+    MovRecomComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="demo-button-container">
+    <div>
+      <h2 class="text-center">
+        <strong>
+          Filtro
+        </strong>
+        </h2>
+    </div>
+    <form [formGroup] = "filter" (ngSubmit) = "doFilter()">
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="StartDate" placeholder="Start date">
+              <input matEndDate formControlName="EndDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          
+            <mat-error *ngIf="filter.controls.StartDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="filter.controls.EndDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-widt" appearance="fill">
+            <mat-label>Géneros</mat-label>
+            <mat-select formControlName="genre">
+                <div *ngFor="let genre of genreArray">
+                    <mat-option value="{{genre.id}}">{{genre.name}}</mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+        <mat-card-actions>
+            <button type="submit" mat-raised-button color="accent">Filtrar</button>
+        </mat-card-actions>
+    </form>
+    </div>
+
+    <div class="product-grid">
+        <app-film *ngFor="let movie of MovieFilter" 
+            (movieClicked) = "clickMovie($event)" 
+            [movie] = "movie">
+            </app-film>
+        </div>
