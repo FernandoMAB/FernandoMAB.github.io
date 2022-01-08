@@ -25,13 +25,13 @@
       <mat-cell *matCellDef="let actor"> {{actor.lastName}} </mat-cell>
     </ng-container>
   
-    <!-- User Name Column -->
+    <!-- User Gender Column -->
     <ng-container matColumnDef="userName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Sexo </mat-header-cell>
       <mat-cell *matCellDef="let actor"> {{actor.gender}} </mat-cell>
     </ng-container>
   
-    <!-- Email Column -->
+    <!-- Birthday Column -->
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Nacimiento (dd-MM-yyy) </mat-header-cell>
       <mat-cell *matCellDef="let actor"> {{actor.birthday.toLocaleDateString('en-GB')}} </mat-cell>

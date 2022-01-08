@@ -8,6 +8,7 @@ import { MovieService } from '../services/movie.service';
 import { Actor } from '../list-actors/list-actors.component';
 import { Genre } from '../list-genre/list-genre.component';
 import { Film } from '../home/home.component';
+import { variable } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-upload-image',
@@ -19,6 +20,7 @@ export class UploadImageComponent implements OnInit {
   submitted = false;
   loading = false;
   id: string |null;
+  idMovie = '';
   title = '';
   description = '';
   button = '';
@@ -64,7 +66,9 @@ export class UploadImageComponent implements OnInit {
   }
 
   getActors(){
-    this._movieService.getActors().subscribe(data =>{
+    
+
+      this._movieService.getActors().subscribe(data =>{
       this.actorArray = [];
       data.forEach((element:any) => {
         this.actorArray.push({
@@ -98,14 +102,27 @@ export class UploadImageComponent implements OnInit {
     }
     this.loading = true;
     this._movieService.addMovie(film).then(()=>{
-      //console.log('Empleado registrado!');
+      this.id = this.aRoute.snapshot.paramMap.get('id');
+      const actor: any = {
+        id_actor: this.createFilm.value.actor,
+        id_movie: this.createFilm.value.title,
+      }
+      const genre: any = {
+        id_genre: this.createFilm.value.genre,
+        id_movie: this.createFilm.value.title,
+      }
+      console.log(actor)
+      
+      this._movieService.addMovActor(actor);
+      this._movieService.addMovGenre(genre);
+      this.router.navigate(['/movies']);
       this.loading = false;
     }).catch(error =>{
       console.error();
       this.loading = false;
     })
 
-    this.getFilmsID(this.createFilm.value.actor,this.createFilm.value.genre);
+    //this.getFilmsID(this.createFilm.value.actor,this.createFilm.value.genre);
     console.log(this.filmArray)
   }
 
@@ -126,13 +143,14 @@ export class UploadImageComponent implements OnInit {
       });
       console.log(this.filmArray);
     })
+    
     const actor: any = {
       id_actor: this.createFilm.value.actor,
-      id_movie: this.filmArray[0].id,
+      id_movie: this.filmArray[0].title,
     }
     const genre: any = {
       id_genre: this.createFilm.value.genre,
-      id_movie: this.filmArray[0].id,
+      id_movie: this.filmArray[0].title,
     }
     console.log(actor)
     
@@ -142,7 +160,35 @@ export class UploadImageComponent implements OnInit {
   }
 
   updateFilm(id:string){
-
+    this.loading = true;
+    const movie: any = {
+      title: this.createFilm.value.title,
+      releaseDate: this.createFilm.value.releaseDate,
+      overView: this.createFilm.value.overView,
+      duration: this.createFilm.value.duration,
+      image: this.createFilm.value.image,
+      modificationDate: new Date()
+    }
+    this._movieService.updateMovie(id,movie).then(()=>{
+      this.id = this.aRoute.snapshot.paramMap.get('id');
+      const actor: any = {
+        id_actor: this.createFilm.value.actor,
+        id_movie: this.createFilm.value.title,
+      }
+      const genre: any = {
+        id_genre: this.createFilm.value.genre,
+        id_movie: this.createFilm.value.title,
+      }
+      console.log(actor)
+      
+      this._movieService.addMovActor(actor);
+      this._movieService.addMovGenre(genre);
+      this.router.navigate(['/movies']);
+      this.loading = false;
+    }).catch(error =>{
+      console.error();
+      this.loading = false;
+    });
   }
 
   addUpdateMovie(){
@@ -158,15 +204,28 @@ export class UploadImageComponent implements OnInit {
   }
 
   isEdit(){
+    this.getGenres();
+    this.getActors();
+    
     if(this.id !== null){
       this.title = 'Editar Film';
       this.description = 'Edite los campos del film';
       this.button = 'Editar';
       this.loading = true;
+      this._movieService.getMovie(this.id).subscribe(data =>{
+        this.loading = false;
+        this.createFilm.setValue({
+          title: data.payload.data()['title'],
+          releaseDate: data.payload.data()['releaseDate'],
+          overView: data.payload.data()['overView'],
+          duration: data.payload.data()['duration'],
+          image: data.payload.data()['image'],
+          genre: this.createFilm.value.genre,
+          actor: this.createFilm.value.actor,
+        })
+      })
       
     }else{
-      this.getGenres();
-      this.getActors();
       this.title = 'Nuevo Film';
       this.description = 'Ingrese un nuevo film';
       this.button = 'Agregar';

@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div class="demo-button-container">
+    <div>
+      <h2 class="text-center">
+        <strong>
+          Lista de Recomendaciones
+        </strong>
+        </h2>
+    </div>
+    <button mat-stroked-button type= "button" (click)="onRecom()" color="primary" class="demo-button" title="Generar Recomendaciones">
+      Generar Recomendaciones
+    </button>
+    </div>
+
+
+    <div class="product-grid">
+
+
+      <app-film *ngFor="let movie of RecomendationM" 
+          (movieClicked) = "clickMovie($event)" 
+          [movie] = "movie">
+          </app-film>
+      </div>

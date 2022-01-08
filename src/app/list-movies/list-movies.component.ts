@@ -25,7 +25,7 @@ export class ListMoviesComponent implements OnInit {
         this.moviesArray.push({
           id: element.payload.doc.id,
           title: element.payload.doc.data().title,
-          releaseDate: element.payload.doc.data().releaseDate,
+          releaseDate: new Date(element.payload.doc.data().releaseDate.seconds*1000),
           overView: element.payload.doc.data().overView,
           duration: element.payload.doc.data().duration,
           image: element.payload.doc.data().image,

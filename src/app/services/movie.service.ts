@@ -20,6 +20,14 @@ export class MovieService {
     return this.firestore.collection('mov_genre').add(movGenre);
   }
 
+  addLike(likeUser: any): Promise<any>{
+    return this.firestore.collection('likes').add(likeUser);
+  }
+
+  deleteLike(id: string): Promise <any> {
+    return this.firestore.collection('likes').doc(id).delete();
+  }
+
   getMovies(): Observable <any>{
     return this.firestore.collection('movie', ref =>ref.orderBy('creationDate','asc')).snapshotChanges();
   }
@@ -33,8 +41,30 @@ export class MovieService {
     return this.firestore.collection('mov_actor', ref => ref.where("id_movie",'==',id)).snapshotChanges();
   }
 
+  getMovActors(): Observable <any>{
+    return this.firestore.collection('mov_actor').snapshotChanges();
+  }
+
   getMovGenre(id: string): Observable <any>{
     return this.firestore.collection('mov_genre', ref => ref.where("id_movie",'==',id)).snapshotChanges();
+  }
+
+  getMovGenres(): Observable <any>{
+    return this.firestore.collection('mov_genre').snapshotChanges();
+  }
+
+  updateMovie(id: string, data: any): Promise <any>{
+    return this.firestore.collection('movie').doc(id).update(data);
+  }
+
+  getMovie(id: string): Observable <any>{
+    return this.firestore.collection('movie').doc(id).snapshotChanges();
+  }
+  getLike(id: string): Observable <any>{
+    return this.firestore.collection('likes', ref => ref.where("userId",'==',id)).snapshotChanges();
+  }
+  getLikes(): Observable <any>{
+    return this.firestore.collection('likes').snapshotChanges();
   }
 ///////////////////////////////////////////////////////////////////////// 
   deleteMovies(id: string): Promise <any> {
@@ -49,8 +79,5 @@ export class MovieService {
     return this.firestore.collection('movie', ref=> ref.orderBy('creationDate','desc')).snapshotChanges();
   }
 
-  updateEmployee(id: string, data: any): Promise <any>{
-    return this.firestore.collection('movie').doc(id).update(data);
-  }
 
 }

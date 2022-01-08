@@ -7,7 +7,7 @@
       </strong>
       </h2>
   </div>
-    <button mat-stroked-button color="primary" class="demo-button" routerLink="/create" title="Ingresar una nueva pelicula">
+    <button mat-stroked-button color="primary" class="demo-button" routerLink="/create-movie" title="Ingresar una nueva pelicula">
       Ingresar una pelicula
     </button>
   </div>
@@ -22,7 +22,7 @@
     <!-- Last Name Column -->
     <ng-container matColumnDef="releaseDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Lanzamiento </mat-header-cell>
-      <mat-cell *matCellDef="let movie"> {{movie.releaseDate}} </mat-cell>
+      <mat-cell *matCellDef="let movie"> {{movie.releaseDate.toLocaleDateString('en-GB')}} </mat-cell>
     </ng-container>
   
     <!-- User Name Column -->
@@ -40,7 +40,7 @@
     <ng-container matColumnDef="image">
         <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
         <mat-cell class="example-button-row" *matCellDef="let movie"> 
-            <button mat-raised-button color="primary"  [routerLink] = "['/edit-employee/',movie.id]" title="Editar">
+            <button mat-raised-button color="primary"  [routerLink] = "['/edit-movie/',movie.id]" title="Editar">
                 <mat-icon >edit</mat-icon>
                 </button>
             <button (click)="deleteMovies(movie.id)" mat-raised-button color="warn" title="Eliminar">

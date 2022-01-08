@@ -13,7 +13,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button class="demo-button" mat-button>LIKE</button>
-      <button class="demo-button" mat-button>SHARE</button>
+      <button (click)="like(movie.id)" class="demo-button" mat-button>LIKE</button>
+      <button class="demo-button" mat-button>DETAILS</button>
     </mat-card-actions>
   </mat-card>

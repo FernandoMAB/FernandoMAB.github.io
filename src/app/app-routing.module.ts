@@ -15,6 +15,7 @@ import { ListActorsComponent } from './list-actors/list-actors.component';
 import { CreateGenreComponent } from './create-genre/create-genre.component';
 import { ListGenreComponent } from './list-genre/list-genre.component';
 import { ListMoviesComponent } from './list-movies/list-movies.component';
+import { MovRecomComponent } from './mov-recom/mov-recom.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -70,7 +71,13 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
-    path: 'create',
+    path: 'create-movie',
+    component: UploadImageComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'edit-movie/:id',
     component: UploadImageComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
@@ -109,6 +116,12 @@ const routes: Routes = [
     path: 'edit-genre/:id',
     canActivate: [AngularFireAuthGuard],
     component: CreateGenreComponent,
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'suggestions',
+    canActivate: [AngularFireAuthGuard],
+    component: MovRecomComponent,
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
